@@ -25,7 +25,7 @@ namespace handling {
 			handling::utils::Command = Command;
 
 			// Example
-			hacks::misc::move.OnEveryFrame();
+			hacks::misc::move.OnMove();
 
 			return false;
 		}
