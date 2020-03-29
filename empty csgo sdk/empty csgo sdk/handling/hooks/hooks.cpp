@@ -27,7 +27,7 @@ namespace handling {
 			// Example
 			hacks::misc::move.OnEveryFrame();
 
-			return true;
+			return false;
 		}
 
 		static void __fastcall PaintTraverseHook(std::uint32_t* ecx, std::uint32_t* edx, std::uint32_t Panel, bool ForceRepaint, bool AllowForce) noexcept {
