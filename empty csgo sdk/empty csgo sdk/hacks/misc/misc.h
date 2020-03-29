@@ -7,7 +7,7 @@ namespace hacks {
 		class movement {
 		public:
 			void DuckLimitBypass(void) noexcept;
-			void OnEveryFrame(void) noexcept;
+			void OnMove(void) noexcept;
 		};
 
 		extern movement move;
