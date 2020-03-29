@@ -8,7 +8,7 @@ namespace hacks {
 			handling::utils::Command->Buttons |= sdk::classes::cmd_buttons::in_bullrush;
 		}
 
-		void movement::OnEveryFrame(void) noexcept {
+		void movement::OnMove(void) noexcept {
 			this->DuckLimitBypass();
 		}
 		
