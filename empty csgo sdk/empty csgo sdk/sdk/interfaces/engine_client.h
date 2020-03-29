@@ -28,6 +28,9 @@ namespace sdk {
         class vmatrix;
         class matrix3x4_t;
 
+        class base_general;
+        class collideable;
+
         typedef struct player_info_s {
             __int64         unknown;           
             union {
@@ -62,7 +65,7 @@ namespace sdk {
             virtual bool                  GetPlayerInfo(std::int32_t ent_num, player_info_t* pinfo) = 0;
             virtual std::int32_t          GetPlayerForUserID(std::int32_t userID) = 0;
             virtual client_textmessage_t* TextMessageGet(const char* pName) = 0;
-            virtual bool                  Con_IsVisible(void) = 0;
+            virtual bool                  ConIsVisible(void) = 0;
             virtual std::int32_t          GetLocalPlayer(void) = 0;
             virtual const model_t*        LoadModel(const char* pName, bool bProp = false) = 0;
             virtual float                 GetLastTimeStamp(void) = 0;
@@ -72,21 +75,21 @@ namespace sdk {
             virtual void                  GetViewAngles(sdk::math::vector_3d& va) = 0;
             virtual void                  SetViewAngles(sdk::math::vector_3d& va) = 0;
             virtual std::int32_t          GetMaxClients(void) = 0;
-            virtual const char*           Key_LookupBinding(const char* pBinding) = 0;
-            virtual const char*           Key_BindingForKey(std::int32_t& code) = 0;
-            virtual void                  Key_SetBinding(std::int32_t, char const*) = 0;
+            virtual const char*           KeyLookupBinding(const char* pBinding) = 0;
+            virtual const char*           KeyBindingForKey(std::int32_t& code) = 0;
+            virtual void                  KeySetBinding(std::int32_t, char const*) = 0;
             virtual void                  StartKeyTrapMode(void) = 0;
             virtual bool                  CheckDoneKeyTrapping(std::int32_t& code) = 0;
             virtual bool                  IsInGame(void) = 0;
             virtual bool                  IsConnected(void) = 0;
             virtual bool                  IsDrawingLoadingImage(void) = 0;
             virtual void                  HideLoadingPlaque(void) = 0;
-            virtual void                  Con_NPrintf(std::int32_t pos, const char* fmt, ...) = 0;
-            virtual void                  Con_NXPrintf(const struct con_nprint_s* info, const char* fmt, ...) = 0;
+            virtual void                  ConNPrintf(std::int32_t pos, const char* fmt, ...) = 0;
+            virtual void                  ConNXPrintf(const struct con_nprint_s* info, const char* fmt, ...) = 0;
             virtual std::int32_t          IsBoxVisible(const sdk::math::vector_3d& mins, const sdk::math::vector_3d& maxs) = 0;
             virtual std::int32_t          IsBoxInViewCluster(const sdk::math::vector_3d& mins, const sdk::math::vector_3d& maxs) = 0;
             virtual bool                  CullBox(const sdk::math::vector_3d& mins, const sdk::math::vector_3d& maxs) = 0;
-            virtual void                  Sound_ExtraUpdate(void) = 0;
+            virtual void                  SoundExtraUpdate(void) = 0;
             virtual const char*           GetGameDirectory(void) = 0;
             virtual const vmatrix&        WorldToScreenMatrix() = 0;
             virtual const vmatrix&        WorldToViewMatrix() = 0;
@@ -101,15 +104,15 @@ namespace sdk {
             virtual void                  GetAmbientLightColor(sdk::math::vector_3d& color) = 0;
             virtual std::int32_t          GetDXSupportLevel() = 0;
             virtual bool                  SupportsHDR() = 0;
-            virtual void                  Mat_Stub(imaterialsystem* pMatSys) = 0;
+            virtual void                  MatStub(imaterialsystem* pMatSys) = 0;
             virtual void                  GetChapterName(char* pchBuff, std::int32_t iMaxLength) = 0;
             virtual char const*           GetLevelName(void) = 0;
             virtual char const*           GetLevelNameShort(void) = 0;
             virtual char const*           GetMapGroupName(void) = 0;
             virtual struct IVoiceTweak_s* GetVoiceTweakAPI(void) = 0;
             virtual void                  SetVoiceCasterID(std::uint32_t someint) = 0; 
-            virtual void                  EngineStats_BeginFrame(void) = 0;
-            virtual void                  EngineStats_EndFrame(void) = 0;
+            virtual void                  EngineStatsBeginFrame(void) = 0;
+            virtual void                  EngineStatsEndFrame(void) = 0;
             virtual void                  FireEvents() = 0;
             virtual std::int32_t          GetLeavesArea(unsigned short* pLeaves, std::int32_t nLeaves) = 0;
             virtual bool                  DoesBoxTouchAreaFrustum(const sdk::math::vector_3d& mins, const sdk::math::vector_3d& maxs, std::int32_t iArea) = 0; 
@@ -153,8 +156,8 @@ namespace sdk {
             virtual const char*           GetMapEntitiesString() = 0;
             virtual bool                  IsInEditMode(void) = 0; 
             virtual float                 GetScreenAspectRatio(std::int32_t viewportWidth, std::int32_t viewportHeight) = 0;
-            virtual bool                  REMOVED_SteamRefreshLogin(const char* password, bool isSecure) = 0;
-            virtual bool                  REMOVED_SteamProcessCall(bool& finished) = 0;
+            virtual bool                  REMOVEDSteamRefreshLogin(const char* password, bool isSecure) = 0;
+            virtual bool                  REMOVEDSteamProcessCall(bool& finished) = 0;
             virtual std::uint32_t         GetEngineBuildNumber() = 0;
             virtual const char*           GetProductVersionString() = 0; 
             virtual void                  GrabPreColorCorrectedFrame(std::int32_t x, std::int32_t y, std::int32_t width, std::int32_t height) = 0;
@@ -164,8 +167,8 @@ namespace sdk {
             virtual bool                  MapHasLightMapAlphaData(void) = 0;
             virtual std::int32_t          GetAppID() = 0;
             virtual sdk::math::vector_3d  GetLightForPointFast(const sdk::math::vector_3d& pos, bool bClamp) = 0;
-            virtual void                  ClientCmd_Unrestricted(char  const*, std::int32_t, bool) = 0;
-            virtual void                  ClientCmd_Unrestricted(const char* szCmdString) = 0;
+            virtual void                  ClientCmdUnrestricted(char  const*, std::int32_t, bool) = 0;
+            virtual void                  ClientCmdUnrestricted(const char* szCmdString) = 0;
             virtual void                  SetRestrictServerCommands(bool bRestrict) = 0;
             virtual void                  SetRestrictClientCommands(bool bRestrict) = 0;
             virtual void                  SetOverlayBindProxy(std::int32_t iOverlayID, void* pBindProxy) = 0;
@@ -221,15 +224,15 @@ namespace sdk {
             virtual void                  SetGamestatsData(cgamestatsdata* pGamestatsData) = 0;
             virtual cgamestatsdata*       GetGamestatsData() = 0;
             virtual void                  GetMouseDelta(std::int32_t& dx, std::int32_t& dy, bool b) = 0;
-            virtual const char*           Key_LookupBindingEx(const char* pBinding, std::int32_t iUserId = -1, std::int32_t iStartCount = 0, std::int32_t iAllowJoystick = -1) = 0;
-            virtual std::int32_t          Key_CodeForBinding(char  const*, std::int32_t, std::int32_t, std::int32_t) = 0;
+            virtual const char*           KeyLookupBindingEx(const char* pBinding, std::int32_t iUserId = -1, std::int32_t iStartCount = 0, std::int32_t iAllowJoystick = -1) = 0;
+            virtual std::int32_t          KeyCodeForBinding(char  const*, std::int32_t, std::int32_t, std::int32_t) = 0;
             virtual void                  UpdateDAndELights(void) = 0;
             virtual std::int32_t          GetBugSubmissionCount() const = 0;
             virtual void                  ClearBugSubmissionCount() = 0;
             virtual bool                  DoesLevelContainWater() const = 0;
             virtual float                 GetServerSimulationFrameTime() const = 0;
-            virtual void                  SolidMoved(class IClientEntity* pSolidEnt, class ICollideable* pSolidCollide, const sdk::math::vector_3d* pPrevAbsOrigin, bool accurateBboxTriggerChecks) = 0;
-            virtual void                  TriggerMoved(class IClientEntity* pTriggerEnt, bool accurateBboxTriggerChecks) = 0;
+            virtual void                  SolidMoved(base_general* pSolidEnt, collideable* pSolidCollide, const sdk::math::vector_3d* pPrevAbsOrigin, bool accurateBboxTriggerChecks) = 0;
+            virtual void                  TriggerMoved(base_general* pTriggerEnt, bool accurateBboxTriggerChecks) = 0;
             virtual void                  ComputeLeavesConnected(const sdk::math::vector_3d& vecOrigin, std::int32_t nCount, const std::int32_t* pLeafIndices, bool* pIsConnected) = 0;
             virtual bool                  IsInCommentaryMode(void) = 0;
             virtual void                  SetBlurFade(float amount) = 0;
