@@ -4,6 +4,6 @@ this was a project made for analysis only.
 
 ## Who is responsible for this?
 - Victor Machado (rhz17)
-- Wando
+- Wando1423
 
 have fun, guys
